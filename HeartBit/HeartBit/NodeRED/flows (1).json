@@ -1,0 +1,865 @@
+[
+    {
+        "id": "57d158bef7817910",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "18083117675883af",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1a283697a5b9116c",
+        "type": "cloudantplus",
+        "host": "https://f1c0dcf9-5075-4061-a1f8-2f4ca596058a-bluemix.cloudantnosqldb.appdomain.cloud",
+        "name": "nome",
+        "useapikey": true
+    },
+    {
+        "id": "489a3ddc257707ad",
+        "type": "cloudantplus",
+        "host": "https://f1c0dcf9-5075-4061-a1f8-2f4ca596058a-bluemix.cloudantnosqldb.appdomain.cloud",
+        "name": "umidadehg",
+        "useapikey": true
+    },
+    {
+        "id": "d7ddb01746ae4ffd",
+        "type": "cloudantplus",
+        "host": "https://f1c0dcf9-5075-4061-a1f8-2f4ca596058a-bluemix.cloudantnosqldb.appdomain.cloud",
+        "name": "PrimeraCred",
+        "useapikey": true
+    },
+    {
+        "id": "240ad15a52a8c3fd",
+        "type": "http in",
+        "z": "57d158bef7817910",
+        "name": "",
+        "url": "/getbatimentosteste",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "6e890ed093d991cd"
+            ]
+        ]
+    },
+    {
+        "id": "4a3cd94dfcee2f91",
+        "type": "http response",
+        "z": "57d158bef7817910",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 630,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "56a4f2451917f951",
+        "type": "cloudantplus out",
+        "z": "57d158bef7817910",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "batimentosteste01",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 710,
+        "y": 260,
+        "wires": [
+            [
+                "b1d8f4bcac5d76bd"
+            ]
+        ]
+    },
+    {
+        "id": "d5d97923dca93f37",
+        "type": "function",
+        "z": "57d158bef7817910",
+        "name": "Criar msg de get",
+        "func": "msg.payload = {\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 480,
+        "wires": [
+            [
+                "32ae561acd5beb4d"
+            ]
+        ]
+    },
+    {
+        "id": "121892888f307c64",
+        "type": "http in",
+        "z": "57d158bef7817910",
+        "name": "",
+        "url": "/postbatimentosteste",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 260,
+        "wires": [
+            [
+                "ae604640e0830de9"
+            ]
+        ]
+    },
+    {
+        "id": "b1d8f4bcac5d76bd",
+        "type": "http response",
+        "z": "57d158bef7817910",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 910,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "6e890ed093d991cd",
+        "type": "cloudantplus in",
+        "z": "57d158bef7817910",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "batimentosteste02",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 410,
+        "y": 140,
+        "wires": [
+            [
+                "4a3cd94dfcee2f91"
+            ]
+        ]
+    },
+    {
+        "id": "f0620ac723e6bf14",
+        "type": "cloudantplus out",
+        "z": "57d158bef7817910",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "batimentosteste02",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "delete",
+        "x": 690,
+        "y": 380,
+        "wires": [
+            [
+                "ad49185dfe71cc71"
+            ]
+        ]
+    },
+    {
+        "id": "e7ee566a19353b03",
+        "type": "http in",
+        "z": "57d158bef7817910",
+        "name": "",
+        "url": "/deletebatimentosteste",
+        "method": "delete",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "1a1daf8e17aeea21"
+            ]
+        ]
+    },
+    {
+        "id": "ad49185dfe71cc71",
+        "type": "http response",
+        "z": "57d158bef7817910",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 850,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "eb46f6a8b862fed7",
+        "type": "split",
+        "z": "57d158bef7817910",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 510,
+        "y": 360,
+        "wires": [
+            [
+                "f0620ac723e6bf14"
+            ]
+        ]
+    },
+    {
+        "id": "a3654a5016875bb1",
+        "type": "split",
+        "z": "57d158bef7817910",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1230,
+        "y": 480,
+        "wires": [
+            [
+                "101437658e9e960b"
+            ]
+        ]
+    },
+    {
+        "id": "4a7f0bae4992afce",
+        "type": "http in",
+        "z": "57d158bef7817910",
+        "name": "",
+        "url": "/postdelbatimentosteste",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "d963f6a3e877850c",
+                "2b3c6e49d30b4184",
+                "d5d97923dca93f37"
+            ]
+        ]
+    },
+    {
+        "id": "e3e00e27e325528f",
+        "type": "cloudantplus out",
+        "z": "57d158bef7817910",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "batimentosteste01",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 710,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e18fb4e0dd782704",
+        "type": "cloudantplus out",
+        "z": "57d158bef7817910",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "batimentosteste02",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 710,
+        "y": 600,
+        "wires": [
+            [
+                "51aaba27f116d0a9"
+            ]
+        ]
+    },
+    {
+        "id": "101437658e9e960b",
+        "type": "cloudantplus out",
+        "z": "57d158bef7817910",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "batimentosteste02",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "delete",
+        "x": 1390,
+        "y": 480,
+        "wires": [
+            [
+                "ab91c08d3860d9bd"
+            ]
+        ]
+    },
+    {
+        "id": "32ae561acd5beb4d",
+        "type": "cloudantplus in",
+        "z": "57d158bef7817910",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "batimentosteste02",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 630,
+        "y": 480,
+        "wires": [
+            [
+                "55215f682d3960fd"
+            ]
+        ]
+    },
+    {
+        "id": "e6b80d4c465aafe6",
+        "type": "debug",
+        "z": "57d158bef7817910",
+        "name": "debug intermediario",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "ab91c08d3860d9bd",
+        "type": "debug",
+        "z": "57d158bef7817910",
+        "name": "debug exclusao automatica",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1640,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "55215f682d3960fd",
+        "type": "function",
+        "z": "57d158bef7817910",
+        "name": "Identificar os batimentos antigos",
+        "func": "\nvar min = msg.payload.filter((a) => {\n    let dataatual = Date.now() - 300000;\n    return a.data < dataatual\n});\nmsg.payload = min.map((a) => ({\"_id\": a._id, \"_rev\": a._rev}))\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 480,
+        "wires": [
+            [
+                "d91d8ad781b7e91b"
+            ]
+        ]
+    },
+    {
+        "id": "d91d8ad781b7e91b",
+        "type": "switch",
+        "z": "57d158bef7817910",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1090,
+        "y": 480,
+        "wires": [
+            [
+                "a3654a5016875bb1"
+            ]
+        ]
+    },
+    {
+        "id": "51aaba27f116d0a9",
+        "type": "http response",
+        "z": "57d158bef7817910",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 890,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "d963f6a3e877850c",
+        "type": "function",
+        "z": "57d158bef7817910",
+        "name": "Criar obj com data hora",
+        "func": "msg.payload = {\n    \"batimento\": parseInt(msg.payload.batimento),\n    \"data\": Date.now()\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 600,
+        "wires": [
+            [
+                "e18fb4e0dd782704",
+                "e6b80d4c465aafe6"
+            ]
+        ]
+    },
+    {
+        "id": "ae604640e0830de9",
+        "type": "switch",
+        "z": "57d158bef7817910",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "array",
+                "vt": "array"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 260,
+        "wires": [
+            [
+                "91ead82cd19459e8"
+            ],
+            [
+                "e3e00e27e325528f"
+            ]
+        ]
+    },
+    {
+        "id": "1a1daf8e17aeea21",
+        "type": "switch",
+        "z": "57d158bef7817910",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "array",
+                "vt": "array"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 370,
+        "y": 380,
+        "wires": [
+            [
+                "eb46f6a8b862fed7"
+            ],
+            [
+                "f0620ac723e6bf14"
+            ]
+        ]
+    },
+    {
+        "id": "91ead82cd19459e8",
+        "type": "split",
+        "z": "57d158bef7817910",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 510,
+        "y": 240,
+        "wires": [
+            [
+                "e3e00e27e325528f"
+            ]
+        ]
+    },
+    {
+        "id": "2b3c6e49d30b4184",
+        "type": "debug",
+        "z": "57d158bef7817910",
+        "name": "debug requisicao",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "7b840d4f54646410",
+        "type": "http in",
+        "z": "18083117675883af",
+        "name": "",
+        "url": "/getformteste",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "df2f0801c9a92ea9"
+            ]
+        ]
+    },
+    {
+        "id": "c098f1b0a9a0d0c2",
+        "type": "http response",
+        "z": "18083117675883af",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 910,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "7aa7023fd3d0c4ec",
+        "type": "http in",
+        "z": "18083117675883af",
+        "name": "",
+        "url": "/postformteste",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 260,
+        "wires": [
+            [
+                "3eb90d44f4014ea7"
+            ]
+        ]
+    },
+    {
+        "id": "7d5dceb58328c883",
+        "type": "http response",
+        "z": "18083117675883af",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 950,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "df2f0801c9a92ea9",
+        "type": "cloudantplus in",
+        "z": "18083117675883af",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "formheartbit01",
+        "service": "_ext_",
+        "search": "_all_",
+        "design": "",
+        "index": "",
+        "x": 540,
+        "y": 140,
+        "wires": [
+            [
+                "c098f1b0a9a0d0c2"
+            ]
+        ]
+    },
+    {
+        "id": "b3f6cb4836e43847",
+        "type": "cloudantplus out",
+        "z": "18083117675883af",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "formheartbit01",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "delete",
+        "x": 720,
+        "y": 380,
+        "wires": [
+            [
+                "ee72e3a1dac90a97"
+            ]
+        ]
+    },
+    {
+        "id": "1bcaf48463e85338",
+        "type": "http in",
+        "z": "18083117675883af",
+        "name": "",
+        "url": "/deleteformteste",
+        "method": "delete",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "00c6518112043baa"
+            ]
+        ]
+    },
+    {
+        "id": "ee72e3a1dac90a97",
+        "type": "http response",
+        "z": "18083117675883af",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 890,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8f86b741bd5717e7",
+        "type": "split",
+        "z": "18083117675883af",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 550,
+        "y": 360,
+        "wires": [
+            [
+                "b3f6cb4836e43847"
+            ]
+        ]
+    },
+    {
+        "id": "77e7caa283876019",
+        "type": "cloudantplus out",
+        "z": "18083117675883af",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "formheartbit01",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 740,
+        "y": 260,
+        "wires": [
+            [
+                "7d5dceb58328c883"
+            ]
+        ]
+    },
+    {
+        "id": "3eb90d44f4014ea7",
+        "type": "switch",
+        "z": "18083117675883af",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "array",
+                "vt": "array"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 260,
+        "wires": [
+            [
+                "41a61aa727d4c81a"
+            ],
+            [
+                "77e7caa283876019"
+            ]
+        ]
+    },
+    {
+        "id": "00c6518112043baa",
+        "type": "switch",
+        "z": "18083117675883af",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "array",
+                "vt": "array"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 380,
+        "wires": [
+            [
+                "8f86b741bd5717e7"
+            ],
+            [
+                "b3f6cb4836e43847"
+            ]
+        ]
+    },
+    {
+        "id": "41a61aa727d4c81a",
+        "type": "split",
+        "z": "18083117675883af",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 550,
+        "y": 240,
+        "wires": [
+            [
+                "77e7caa283876019"
+            ]
+        ]
+    },
+    {
+        "id": "66753134fbce0170",
+        "type": "cloudantplus out",
+        "z": "18083117675883af",
+        "name": "",
+        "cloudant": "489a3ddc257707ad",
+        "database": "formheartbit01",
+        "service": "_ext_",
+        "payonly": true,
+        "operation": "insert",
+        "x": 700,
+        "y": 500,
+        "wires": [
+            [
+                "6e9fc82b4151fe90"
+            ]
+        ]
+    },
+    {
+        "id": "5928fb1da6a0dc36",
+        "type": "http in",
+        "z": "18083117675883af",
+        "name": "",
+        "url": "/putformteste",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 500,
+        "wires": [
+            [
+                "46dde32056be5f51"
+            ]
+        ]
+    },
+    {
+        "id": "6e9fc82b4151fe90",
+        "type": "http response",
+        "z": "18083117675883af",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 870,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "9ebf9c752cd18d69",
+        "type": "split",
+        "z": "18083117675883af",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 530,
+        "y": 480,
+        "wires": [
+            [
+                "66753134fbce0170"
+            ]
+        ]
+    },
+    {
+        "id": "46dde32056be5f51",
+        "type": "switch",
+        "z": "18083117675883af",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "array",
+                "vt": "array"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "9ebf9c752cd18d69"
+            ],
+            [
+                "66753134fbce0170"
+            ]
+        ]
+    }
+]
